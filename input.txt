@@ -1,7 +1,2 @@
-6
-tom
-lucius
-ginny
-harry
-ginny
-harry
+4
+4 2 3 4

@@ -157,23 +157,16 @@ int main()
     freopen("output.txt", "w", stdout);
     #endif
 
-    int t;
-    cin>>t;
+    int n,ans=0,a;
 
-    while(t--){
-        map<string,int>mp;
-        string s;
-        cin>>s;
-        mp[s]++;
-        for(auto p : mp){
-            if(p.second){
-                cout<<"YES"<<endl;
-            }else{
-                cout<<"NO"<<endl;
-            }
-        }
+    map<int,int>mp;
+
+    cin>>n;
+    for(int i=0; i<n; i++){
+        cin>>a;
+        mp[a]++;
+        ans=max(ans,mp[a]);
     }
-
-
+    cout<<ans<<endl;
     return 0;
 }
