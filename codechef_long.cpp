@@ -157,16 +157,13 @@ int main()
     freopen("output.txt", "w", stdout);
     #endif
 
-    int n,ans=0,a;
 
-    map<int,int>mp;
-
-    cin>>n;
-    for(int i=0; i<n; i++){
-        cin>>a;
-        mp[a]++;
-        ans=max(ans,mp[a]);
+    int a,b;
+    cin>>a>>b;
+    if(a<=b and b<=6*a){
+        cout<<"YES"<<endl;
+    }else{
+        cout<<"NO"<<endl;
     }
-    cout<<ans<<endl;
     return 0;
 }
