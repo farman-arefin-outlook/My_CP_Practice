@@ -139,9 +139,24 @@ int main()
     freopen("output.txt", "w", stdout);
     #endif
 
-    int a, b;
-    cin>>a>>b;
-    cout<<a*b<<endl;
-    cout<<"Hello World!"<<endl;
+    queue<int>q;
+    priority_queue<int>pq;
+
+    int n=5;
+    for(int i=0,k; i<n; i++){
+        cin>>k;
+        q.push(k);
+        pq.push(k);
+    }
+
+    while(!q.empty()){
+        cout<<' '<<q.front();
+        q.pop();
+    }
+    cout<<endl;
+    while(!pq.empty()){
+        cout<<' '<<pq.top();
+        pq.pop();
+    }
     return 0;
 }

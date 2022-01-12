@@ -83,35 +83,52 @@ ll power(ll x, ll y)
 
 ///function for hourglass sum
 
-int hourglassSum(int **arr){
+// int hourglassSum(vector<vector<int>>arr){
 
 
-	//vector<vector<int>>sum(4,vector<int>(4,0));
-	int maxSum=INT_MIN;
-	int sum=0;
+// 	//vector<vector<int>>sum(4,vector<int>(4,0));
+// 	int maxSum=INT_MIN;
+// 	int sum=0;
 
-	for(int i=0; i<4; i++){
+// 	for(int i=0; i<4; i++){
 
-		for(int j=0; j<4; j++){
-			sum+=arr[i][j]+arr[i][j+1]+arr[i][j+2];
-			sum+=arr[i+1][j+1];
-			sum+=arr[i+2][j+2]+arr[i+2][j+1]+arr[i+2][j+2];
-			if(sum>maxSum){
-				maxSum=sum;
-			}
-		}
-	}
+// 		for(int j=0; j<4; j++){
+// 			sum+=arr[i][j]+arr[i][j+1]+arr[i][j+2];
+// 			sum+=arr[i+1][j+1];
+// 			sum+=arr[i+2][j]+arr[i+2][j+1]+arr[i+2][j+2];
+// 			if(sum>maxSum){
+// 				maxSum=sum;
+// 			}
+// 		}
+// 	}
 
-	// for(int i=0; i<4; i++){
-	// 	for(int j=0; j<4; j++){
-	// 		if(sum[i][j]>=maxSum){
-	// 			maxSum=sum[i][j];
-	// 		}
-	// 	}
-	// }
-	return maxSum;
+// 	// for(int i=0; i<4; i++){
+// 	// 	for(int j=0; j<4; j++){
+// 	// 		if(sum[i][j]>=maxSum){
+// 	// 			maxSum=sum[i][j];
+// 	// 		}
+// 	// 	}
+// 	// }
+// 	return maxSum;
 
-}
+// }
+
+
+//array left rotation 
+// int leftRotation(vector<int>v,int d){
+
+// 	int n=v.size();
+// 	vector<int>rotArr(n);
+// 	for(int oldIdx=0; oldIdx<n; oldIdx++){
+// 		int newIdx=(oldIdx+n-d)%n;
+// 		rotArr[newIdx]=v[oldIdx];
+// 	}
+
+// 	return rotArr;
+// }
+
+
+
 
  int main(){
 
@@ -120,16 +137,18 @@ int hourglassSum(int **arr){
     freopen("output.txt", "w", stdout);
     #endif
 
-    int arr[6][6];
-
-    for(int i=0; i<6; ++i){
-    	for(int j=0; j<6; ++j){
-    		cin>>arr[i][j];
-    	}
+    int n,d;
+    cin>>n>>d;
+    vector<int>v(n);
+    for(int i=0; i<n; i++){
+    	cin>>v[i];
     }
 
-    cout<<hourglassSum(arr)<<endl;
- 	
+    for(int i=0; i<n; i++){
+    	cout<<v[(i+d)%n]<<' ';
+    }
+
+
  	return 0;
  }
 
