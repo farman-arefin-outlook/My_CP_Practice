@@ -139,24 +139,40 @@ int main()
     freopen("output.txt", "w", stdout);
     #endif
 
-    queue<int>q;
+    int t,n,m;
+    queue<pair<int,int>>q;
     priority_queue<int>pq;
 
-    int n=5;
-    for(int i=0,k; i<n; i++){
-        cin>>k;
-        q.push(k);
-        pq.push(k);
+    cin>>t;
+    for(int cs=1; cs<=t; cs++){
+        cin>>n>>m;
+        vector<int>a;
+        for(int i=0,k; i<n; i++){
+            cin>>k;
+            a.push_back(k);
+        }
+    for(int i=0; i<n; i++){
+        q.push(make_pair(a[i],i));
+        pq.push(a[i]);
     }
-
+    int ans=0;
     while(!q.empty()){
-        cout<<' '<<q.front();
-        q.pop();
+        
+        if(q.front().first==pq.top()){
+            ans++;
+            if(q.front().second==m){
+                break;
+            }
+            q.pop();
+            pq.pop();
+        }else{ 
+            q.push(q.front());
+            q.pop();
+        }
     }
-    cout<<endl;
-    while(!pq.empty()){
-        cout<<' '<<pq.top();
-        pq.pop();
-    }
+    cout<<ans<<endl;
+    while(!q.empty()) q.pop();
+    while(!pq.empty()) pq.pop();
+}
     return 0;
 }
