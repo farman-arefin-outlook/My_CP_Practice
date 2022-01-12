@@ -108,7 +108,25 @@ void solve()
    }
    cout<<ans<<endl;
 
-}*/
+}
+
+
+//stringstream 
+
+vector<int>parseInts(string s){
+    stringstream ss(s);
+
+    int a;
+    char c;
+    vector<int>ans;
+    while(ss>>a){
+        ans.push_back(a);
+        ss>>c;
+    }
+    return ans;
+}
+
+*/
 int main()
 {   
     
@@ -139,40 +157,23 @@ int main()
     freopen("output.txt", "w", stdout);
     #endif
 
-    int t,n,m;
-    queue<pair<int,int>>q;
-    priority_queue<int>pq;
-
+    int t;
     cin>>t;
-    for(int cs=1; cs<=t; cs++){
-        cin>>n>>m;
-        vector<int>a;
-        for(int i=0,k; i<n; i++){
-            cin>>k;
-            a.push_back(k);
-        }
-    for(int i=0; i<n; i++){
-        q.push(make_pair(a[i],i));
-        pq.push(a[i]);
-    }
-    int ans=0;
-    while(!q.empty()){
-        
-        if(q.front().first==pq.top()){
-            ans++;
-            if(q.front().second==m){
-                break;
+
+    while(t--){
+        map<string,int>mp;
+        string s;
+        cin>>s;
+        mp[s]++;
+        for(auto p : mp){
+            if(p.second){
+                cout<<"YES"<<endl;
+            }else{
+                cout<<"NO"<<endl;
             }
-            q.pop();
-            pq.pop();
-        }else{ 
-            q.push(q.front());
-            q.pop();
         }
     }
-    cout<<ans<<endl;
-    while(!q.empty()) q.pop();
-    while(!pq.empty()) pq.pop();
-}
+
+
     return 0;
 }
