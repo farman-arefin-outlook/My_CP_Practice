@@ -157,13 +157,25 @@ int main()
     freopen("output.txt", "w", stdout);
     #endif
 
+    pair<int,int>mypair;
+    map<pair<int,int>,string>mp;
 
-    int a,b;
-    cin>>a>>b;
-    if(a<=b and b<=6*a){
-        cout<<"YES"<<endl;
-    }else{
-        cout<<"NO"<<endl;
+    int n;
+    cin>>n;
+    for(int i=0; i<n; i++){
+        cin>>mypair.first>>mypair.second;
+        string s;
+        cin>>s;
+        mp[mypair]=s;
     }
+
+    int t;
+    cin>>t;
+    while(t--){
+        pair<int,int>temp;
+        cin>>temp.first>>temp.second;
+        cout<<mp[temp]<<endl;
+    }
+    
     return 0;
 }
