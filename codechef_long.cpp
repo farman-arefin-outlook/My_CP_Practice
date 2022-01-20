@@ -157,32 +157,27 @@ int main()
     freopen("output.txt", "w", stdout);
     #endif
 
-    
-
-    int n,x;
-    cin>>n>>x;
-
+    int n;
+    cin>>n;
     vector<int>v(n);
-
     for(int i=0; i<n; i++) cin>>v[i];
 
-        int i=0;
-        int j=0;
-        int sum=0;
+        vector<int>p(n+1);
+    p[0]=v[0];
+    for(int i=1; i<=n; i++){
+        p[i]=p[i-1]+v[i];
+    }
 
-        int count=0;
-        while(i<n){
-            sum+=v[i];
+    int ans=0;
+    map<int, int>mp;
+    mp[0]++;
+    
+    for(int r=1; r<n; r++){
+        ans+=mp[p[r]];
 
-            while(sum>=x){
-                if(sum==x){
-                    count++;
-                }
-                sum-=v[j];
-                j++;
-            }
-            i++;
-        }
-        cout<<count<<endl;
+        mp[p[r]]++;
+    }
+    cout<<ans<<endl;
+
     return 0;
 }
