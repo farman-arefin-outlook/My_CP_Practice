@@ -157,27 +157,35 @@ int main()
     freopen("output.txt", "w", stdout);
     #endif
 
-    int n;
-    cin>>n;
-    vector<int>v(n);
-    for(int i=0; i<n; i++) cin>>v[i];
 
-        vector<int>p(n+1);
-    p[0]=v[0];
-    for(int i=1; i<=n; i++){
-        p[i]=p[i-1]+v[i];
-    }
+   int n;
+   cin>>n;
+   vector<pair<int, int>>v;
 
-    int ans=0;
-    map<int, int>mp;
-    mp[0]++;
-    
-    for(int r=1; r<n; r++){
-        ans+=mp[p[r]];
+   for(int i=0; i<n; i++){
+       int x,y;
+       cin>>x>>y;
 
-        mp[p[r]]++;
-    }
-    cout<<ans<<endl;
+       v.push_back({x,y});
+   }
+
+   sort(v.begin(), v.end(), [](auto &a, auto &b){
+      return a.second<b.second;
+   });
+
+   int i=0;
+   int temp=-1;
+   int ans=0;
+   while(i<n){
+      if(temp<=v[i].first){
+        temp=v[i].second;
+        i++;
+        ans++;
+      }else{
+        i++;
+      }
+   }
+   cout<<ans<<endl;
 
     return 0;
 }
