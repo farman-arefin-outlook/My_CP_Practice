@@ -157,30 +157,32 @@ int main()
     freopen("output.txt", "w", stdout);
     #endif
 
-    vector<pair<int,int>>v;
+    
 
     int n,x;
     cin>>n>>x;
-    for(int i=0; i<n; i++){
-        int a;
-        cin>>a;
-        v.push_back({a,i+1});
-    }
 
-    sort(v.begin(),v.end());
+    vector<int>v(n);
 
-    int i=0, j=n-1;
-    while(i<j){
-       if(v[i].first+v[j].first>x){
-          j--;
-       }else if(v[i].first+v[j].first<x){
-          i++;
-       }
-       else if(v[i].first+v[j].first==x){
-          cout<<v[i].second<<' '<<v[j].second<<endl;
-	     return 0;
-       }
-    }
-    cout<<-1<<endl;
+    for(int i=0; i<n; i++) cin>>v[i];
+
+        int i=0;
+        int j=0;
+        int sum=0;
+
+        int count=0;
+        while(i<n){
+            sum+=v[i];
+
+            while(sum>=x){
+                if(sum==x){
+                    count++;
+                }
+                sum-=v[j];
+                j++;
+            }
+            i++;
+        }
+        cout<<count<<endl;
     return 0;
 }
