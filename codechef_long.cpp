@@ -127,6 +127,21 @@ vector<int>parseInts(string s){
 }
 
 */
+
+void solve(){
+
+}
+
+int gcd(int a, int b){
+    if(a>b){
+        swap(a,b);
+    }
+
+    if(a==0) return b;
+
+    return gcd(a, b%a);
+}
+
 int main()
 {   
     
@@ -157,35 +172,18 @@ int main()
     freopen("output.txt", "w", stdout);
     #endif
 
+    int n;
+    cin>>n;
+    vector<int>v(n);
 
-   int n;
-   cin>>n;
-   vector<pair<int, int>>v;
+    std::map<int , int> mp;
+    int ans=0;
 
-   for(int i=0; i<n; i++){
-       int x,y;
-       cin>>x>>y;
-
-       v.push_back({x,y});
-   }
-
-   sort(v.begin(), v.end(), [](auto &a, auto &b){
-      return a.second<b.second;
-   });
-
-   int i=0;
-   int temp=-1;
-   int ans=0;
-   while(i<n){
-      if(temp<=v[i].first){
-        temp=v[i].second;
-        i++;
-        ans++;
-      }else{
-        i++;
-      }
-   }
-   cout<<ans<<endl;
-
+    for(int i=0; i<n; i++){
+        cin>>v[i];
+        mp[v[i]]++;
+        ans=max(ans,mp[v[i]]);
+    }
+    cout<<ans<<endl;
     return 0;
 }
