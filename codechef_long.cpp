@@ -174,16 +174,24 @@ int main()
 
     int n;
     cin>>n;
-    vector<int>v(n);
 
-    std::map<int , int> mp;
-    int ans=0;
+    pair<int, int>mypair;
+    map<pair<int ,int>, string>mp;
 
     for(int i=0; i<n; i++){
-        cin>>v[i];
-        mp[v[i]]++;
-        ans=max(ans,mp[v[i]]);
+        cin>>mypair.first>>mypair.second;
+
+        string s;
+        cin>>s;
+        mp[mypair]=s;
     }
-    cout<<ans<<endl;
+
+    int t;
+    cin>>t;
+    while(t--){
+        pair<int , int>temp;
+        cin>>temp.first>>temp.second;
+        cout<<mp[temp]<<endl;
+    }
     return 0;
 }
