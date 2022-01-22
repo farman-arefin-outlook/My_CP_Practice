@@ -172,26 +172,29 @@ int main()
     freopen("output.txt", "w", stdout);
     #endif
 
+    
+
     int n;
     cin>>n;
-
-    pair<int, int>mypair;
-    map<pair<int ,int>, string>mp;
+    map<int, int>mp;
+    vector<int>v(n);
 
     for(int i=0; i<n; i++){
-        cin>>mypair.first>>mypair.second;
-
-        string s;
-        cin>>s;
-        mp[mypair]=s;
+        cin>>v[i];
+        mp[v[i]]++;
     }
 
-    int t;
-    cin>>t;
-    while(t--){
-        pair<int , int>temp;
-        cin>>temp.first>>temp.second;
-        cout<<mp[temp]<<endl;
+    int ans=0;
+    for(auto p : mp){
+        int x=p.first;
+        int n=p.second;
+
+        if(n<x){
+            ans+=n;
+        }else{
+            ans+=n-x;
+        }
     }
+    cout<<ans<<endl;
     return 0;
 }
