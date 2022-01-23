@@ -12,35 +12,35 @@ vector <ll> v;
 bool prime[MAXN];
 /*void sieve()
 {
-    v.pb(2);
-    for(ll i=3;i*i<=MAXN;i+=2)
-    {
-        if(prime[i] == false)
-        {
-            for(ll j=i*i;j<=MAXN;j+=(2*i))
-                prime[j] = true;
-        }
-    }
-    for(ll i=3;i<=MAXN;i+=2) if(prime[i] == false) v.pb(i);
+	v.pb(2);
+	for(ll i=3;i*i<=MAXN;i+=2)
+	{
+		if(prime[i] == false)
+		{
+			for(ll j=i*i;j<=MAXN;j+=(2*i))
+				prime[j] = true;
+		}
+	}
+	for(ll i=3;i<=MAXN;i+=2) if(prime[i] == false) v.pb(i);
 
 }
 ll lm(ll a,ll b)
 {
-    return (a/__gcd(a,b))*b;
+	return (a/__gcd(a,b))*b;
 }
 ll lcm(vector<ll> v)
 {
-    ll lc = 1;
-    for(int i=0;i<v.size();i++)
-    {
-        lc = lm(lc,v[i]);
-    }
-    return lc;
+	ll lc = 1;
+	for(int i=0;i<v.size();i++)
+	{
+		lc = lm(lc,v[i]);
+	}
+	return lc;
 }
 ll sum(ll n,ll a,ll b)
 {
-    if(a % n == 0) return (b/n)-(a/n)+1;
-    return (b/n)-(a/n);
+	if(a % n == 0) return (b/n)-(a/n)+1;
+	return (b/n)-(a/n);
 }
 void solve()
 {
@@ -49,62 +49,62 @@ void solve()
    ll a = max(c,d);
    ll b = min (c,d);
    if(a==b) {
-    cout<<0<<endl;
-    return;
+	cout<<0<<endl;
+	return;
    }
 
    ll ans = 0;
-    ans = m+1;
-    b  = a-b;
+	ans = m+1;
+	b  = a-b;
    int mn = -1;
    vector<ll>str;
-    ll tmp  = b;
+	ll tmp  = b;
 
    for(int i=0;i<v.size() && v[i]*v[i] <= b;i++)
    {
-       if(b%v[i] == 0)
-       {
-           while(b%v[i] == 0)
-           {
-               b /= v[i];
-           }
-           str.pb(v[i]);
-       }
+	   if(b%v[i] == 0)
+	   {
+		   while(b%v[i] == 0)
+		   {
+			   b /= v[i];
+		   }
+		   str.pb(v[i]);
+	   }
    }
    if(b > 1) str.pb(b);
-     b = tmp;
+	 b = tmp;
 
-        int total = 1<<str.size();
+		int total = 1<<str.size();
    for(int i=1;i<total;i++)
    {
-       vector<ll>res;
-            for(int j=0;j<str.size();j++)
-            {
-                if(i & (1 << j))
-                   {
-                       res.push_back(str[j]);
-                   }
-            }
+	   vector<ll>res;
+			for(int j=0;j<str.size();j++)
+			{
+				if(i & (1 << j))
+				   {
+					   res.push_back(str[j]);
+				   }
+			}
 
-            if(res.size() % 2 != 0)
-            {
-              ll lc = lcm(res);
-              if(lc <= a)
-              {
-                 ll es = sum(lc,a,a+m);
-                 ans -= es;
-              }
-            }
-            else{
-               ll lc = lcm(res);
+			if(res.size() % 2 != 0)
+			{
+			  ll lc = lcm(res);
+			  if(lc <= a)
+			  {
+				 ll es = sum(lc,a,a+m);
+				 ans -= es;
+			  }
+			}
+			else{
+			   ll lc = lcm(res);
 
-              if(lc <= a)
-              {
-                  ll es = sum(lc,a,a+m);
+			  if(lc <= a)
+			  {
+				  ll es = sum(lc,a,a+m);
 
-                 ans += es;
-              }
-            }
+				 ans += es;
+			  }
+			}
    }
    cout<<ans<<endl;
 
@@ -114,16 +114,16 @@ void solve()
 //stringstream 
 
 vector<int>parseInts(string s){
-    stringstream ss(s);
+	stringstream ss(s);
 
-    int a;
-    char c;
-    vector<int>ans;
-    while(ss>>a){
-        ans.push_back(a);
-        ss>>c;
-    }
-    return ans;
+	int a;
+	char c;
+	vector<int>ans;
+	while(ss>>a){
+		ans.push_back(a);
+		ss>>c;
+	}
+	return ans;
 }
 
 */
@@ -133,68 +133,87 @@ void solve(){
 }
 
 int gcd(int a, int b){
-    if(a>b){
-        swap(a,b);
-    }
+	if(a>b){
+		swap(a,b);
+	}
 
-    if(a==0) return b;
+	if(a==0) return b;
 
-    return gcd(a, b%a);
+	return gcd(a, b%a);
 }
 
 int main()
 {   
-    
-    // IOS;
-    // double memoizedArray[1000001];//Array for Memoization
-    // memoizedArray[0] = 0; //Don't do manual log for 0, it will throw an error
+	
+	// IOS;
+	// double memoizedArray[1000001];//Array for Memoization
+	// memoizedArray[0] = 0; //Don't do manual log for 0, it will throw an error
 
-    // //Memoizing the array
-    // for(int i=1;i<=1000000;i++){
-    //   memoizedArray[i] = memoizedArray[i-1] + log(i);
-    // }
+	// //Memoizing the array
+	// for(int i=1;i<=1000000;i++){
+	//   memoizedArray[i] = memoizedArray[i-1] + log(i);
+	// }
 
-    // int testCase, base;
-    // long digits,n;
+	// int testCase, base;
+	// long digits,n;
 
-    // cin >> testCase;
+	// cin >> testCase;
 
-    // for(int i = 1; i<= testCase; i++){
-    //     cin >> n >> base;
-    //     //The formula
-    //     digits = memoizedArray[n]/log(base) + 1;
-    //     cout << "Case " << i << ": " << digits << "\n";
-    // }
+	// for(int i = 1; i<= testCase; i++){
+	//     cin >> n >> base;
+	//     //The formula
+	//     digits = memoizedArray[n]/log(base) + 1;
+	//     cout << "Case " << i << ": " << digits << "\n";
+	// }
 
 
-    #ifndef ONLINE_JUDGE 
-    freopen("input.txt", "r", stdin); 
-    freopen("output.txt", "w", stdout);
-    #endif
+	#ifndef ONLINE_JUDGE 
+	freopen("input.txt", "r", stdin); 
+	freopen("output.txt", "w", stdout);
+	#endif
 
-    
+    int n,m;
+    cin>>n>>m;
 
-    int n;
-    cin>>n;
-    map<int, int>mp;
-    vector<int>v(n);
+    map<string ,string>mp1;
+    map<string, int>mp2;
+    map<string, int>mp3;
+
 
     for(int i=0; i<n; i++){
-        cin>>v[i];
-        mp[v[i]]++;
+        string chef,country;
+
+        cin>>chef>>country;
+
+        mp1[chef]=country;
     }
 
-    int ans=0;
-    for(auto p : mp){
-        int x=p.first;
-        int n=p.second;
+    int chef=0, votes=0;
 
-        if(n<x){
-            ans+=n;
-        }else{
-            ans+=n-x;
+    for(int i=0; i<m; i++){
+        string s;
+        cin>>s;
+
+        mp2[s]++;
+        mp3[mp1[s]]++;
+
+        chef=max(chef, mp2[s]);
+        votes=max(votes, mp3[mp1[s]]);
+    }
+
+
+    for(auto it : mp3){
+        if(it.second==votes){
+            cout<<it.first<<endl;
+            break;
         }
     }
-    cout<<ans<<endl;
-    return 0;
+    for(auto it : mp2){
+        if(it.second==chef){
+            cout<<it.first<<endl;
+            break;
+        }
+    }
+    
+	return 0;
 }
