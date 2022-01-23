@@ -173,41 +173,47 @@ int main()
 	#endif
 
 
-    int t;
-    cin>>t;
 
-    queue<pair<int , int>>q;
-    priority_queue<int>pq;
-    while(t--){
-        int n,m;
-        cin>>n>>m;
+	int n,m;
 
-        for(int i=0; i<n; i++){
-            int a;
-            cin>>a;
-            q.push({a,i});
-            pq.push(a);
+	cin>>n>>m;
+
+	map<string , string>mp1;
+	map<string , int>mp2;
+	map<string , int>mp3;
+
+	for(int i=0; i<n; i++){
+		string chef, country;
+
+		cin>>chef>>country;
+
+		mp1[chef]=country;
+	}
+
+	int chef=0,votes=0;
+	for(int i=0; i<m; i++){
+		string s;
+		cin>>s;
+		mp2[s]++;
+
+		mp3[mp1[s]]++;
+
+		chef=max(chef,mp2[s]);
+		votes=max(votes,mp3[mp1[s]]);
+
+	}
+  for(auto it : mp3){
+        if(it.second==votes){
+            cout<<it.first<<endl;
+            break;
         }
-
-        int ans=0;
-
-        while(!q.empty()){
-            if(q.front().first==pq.top()){
-                ans++;
-                if(q.front().second==m){
-                    break;
-                }
-                q.pop();
-                pq.pop();
-            }else{
-                q.push(q.front());
-                q.pop();
-            }
-        }
-        cout<<ans<<endl;
-
-        while(!q.empty()) q.pop();
-        while(!pq.empty()) pq.pop();
     }
+    for(auto it : mp2){
+        if(it.second==chef){
+            cout<<it.first<<endl;
+            break;
+        }
+    }
+
 	return 0;
 }
