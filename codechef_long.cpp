@@ -4,12 +4,30 @@ using namespace std;
 typedef long long int ll;
 #define IOS ios_base::sync_with_stdio(0);  cin.tie(0); cout.tie(0);
 
-#define MAXN 1000010
+#define MAXN 10000001
 #define pb push_back
 int cnt [ MAXN+1];
 const int mod = 1e9+7;
 vector <ll> v;
 bool prime[MAXN];
+
+
+
+void sieve ()
+{
+    int i,j;
+    prime[0] = prime[1] = true;
+
+    for (i=4; i<MAXN; i+=2)
+        prime[i] = true;
+
+    for (i=3; i*i<=MAXN; i+=2)
+        if (!prime[i])
+            for (j=i*i; j<MAXN; j+=2*i)
+                prime[j] = true;
+}
+
+
 /*void sieve()
 {
 	v.pb(2);
@@ -24,6 +42,7 @@ bool prime[MAXN];
 	for(ll i=3;i<=MAXN;i+=2) if(prime[i] == false) v.pb(i);
 
 }
+
 ll lm(ll a,ll b)
 {
 	return (a/__gcd(a,b))*b;
@@ -172,48 +191,23 @@ int main()
 	freopen("output.txt", "w", stdout);
 	#endif
 
+ 	
+ 	sieve();
 
+ 	int n;
+ 	cin>>n;
 
-	int n,m;
+ 	for(int i=0; i<n; i++){
+ 		long long int b;
+ 		cin>>b;
 
-	cin>>n>>m;
+ 		long long int ans=sqrt(b);
 
-	map<string , string>mp1;
-	map<string , int>mp2;
-	map<string , int>mp3;
-
-	for(int i=0; i<n; i++){
-		string chef, country;
-
-		cin>>chef>>country;
-
-		mp1[chef]=country;
-	}
-
-	int chef=0,votes=0;
-	for(int i=0; i<m; i++){
-		string s;
-		cin>>s;
-		mp2[s]++;
-
-		mp3[mp1[s]]++;
-
-		chef=max(chef,mp2[s]);
-		votes=max(votes,mp3[mp1[s]]);
-
-	}
-  for(auto it : mp3){
-        if(it.second==votes){
-            cout<<it.first<<endl;
-            break;
-        }
-    }
-    for(auto it : mp2){
-        if(it.second==chef){
-            cout<<it.first<<endl;
-            break;
-        }
-    }
-
+ 		if(!prime[ans] and ans*ans==b){
+ 			cout<<"YES"<<endl;
+ 		}else{
+ 			cout<<"NO"<<endl;
+ 		}
+ 	}
 	return 0;
 }
