@@ -191,23 +191,42 @@ int main()
 	freopen("output.txt", "w", stdout);
 	#endif
 
- 	
- 	sieve();
 
- 	int n;
- 	cin>>n;
 
- 	for(int i=0; i<n; i++){
- 		long long int b;
- 		cin>>b;
+	int t;
+	cin>>t;
 
- 		long long int ans=sqrt(b);
 
- 		if(!prime[ans] and ans*ans==b){
- 			cout<<"YES"<<endl;
- 		}else{
- 			cout<<"NO"<<endl;
- 		}
- 	}
+	while(t--){
+
+		int a,k;
+		cin>>a>>k;
+
+
+		vector<pair<int , int>>v(a);
+
+		for(int i=0; i<a; i++){
+			cin>>v[i].first;
+		}
+
+		for (int i = 0; i < a; ++i)
+		{
+			cin>>v[i].second;
+		}
+
+		sort(v.begin(),v.end());
+
+		for(int i=0; i<a; i++){
+			if(v[i].first<=k){
+				k+=v[i].second;
+			}else{
+				break;
+			}
+		}
+
+		cout<<k<<'\n';
+	}
+
+
 	return 0;
 }
