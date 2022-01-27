@@ -11,6 +11,16 @@ const int mod = 1e9+7;
 vector <ll> v;
 bool prime[MAXN];
 
+using vi = vector<int>;
+#define rsz resize
+#define all(x) begin(x), end(x)
+#define sz(x) (int)(x).size()
+
+using pi = pair<int,int>;
+#define f first
+#define s second
+#define mp make_pair
+
 
 
 void sieve ()
@@ -193,40 +203,39 @@ int main()
 
 
 
-	int t;
-	cin>>t;
-
-
-	while(t--){
-
-		int a,k;
-		cin>>a>>k;
-
-
-		vector<pair<int , int>>v(a);
-
-		for(int i=0; i<a; i++){
-			cin>>v[i].first;
-		}
-
-		for (int i = 0; i < a; ++i)
-		{
-			cin>>v[i].second;
-		}
-
-		sort(v.begin(),v.end());
-
-		for(int i=0; i<a; i++){
-			if(v[i].first<=k){
-				k+=v[i].second;
-			}else{
-				break;
-			}
-		}
-
-		cout<<k<<'\n';
+	int N;
+	cin >> N;
+	vector<pair<int, int>> customers;
+	for (int i = 0; i < N; ++i) {
+		int a, b; cin >> a >> b;
+		customers.push_back({a, 1});
+		customers.push_back({b + 1, -1});
 	}
 
+	sort(customers.begin(), customers.end());
+
+	int curr = 0;
+	int l = 0;
+	vector<long long> pfx(2*N + 1); // prefix sum array
+	vector<int> arr(2*N);
+
+	for (int i = 0; i < 2*N; ++i) { // coordinate compression
+		if(i == 0) { customers[i].first = 0; }
+		else if(customers[i].first > curr) { l++; curr = customers[i].first; } // we move a pointer
+		arr[l+1] += customers[i].second;
+		// pfx[l+1] += customers[i].second; implementation without arr, merges all interval end and starts here
+	}
+
+	for (int i = 1; i < 2*N + 1; ++i) {
+		pfx[i] = arr[i] + pfx[i-1];
+		// pfx[i] += pfx[i-1]; implementation without arr
+	}
+
+	long long ret = 0;
+
+	for (int i = 0; i < 2*N + 1; ++i)
+		ret = max(ret, pfx[i]); // find our maximum value
+	cout << ret << "\n";
 
 	return 0;
 }
