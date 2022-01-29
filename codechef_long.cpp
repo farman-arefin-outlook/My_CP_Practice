@@ -171,6 +171,25 @@ int gcd(int a, int b){
 	return gcd(a, b%a);
 }
 
+
+//Kadane's Algorithm
+
+int maxSubArraySum(int a[], int size)
+{
+    int max_so_far = INT_MIN, max_ending_here = 0;
+ 
+    for (int i = 0; i < size; i++)
+    {
+        max_ending_here = max_ending_here + a[i];
+        if (max_so_far < max_ending_here)
+            max_so_far = max_ending_here;
+ 
+        if (max_ending_here < 0)
+            max_ending_here = 0;
+    }
+    return max_so_far;
+}
+
 int main()
 {   
 	
@@ -201,41 +220,26 @@ int main()
 	freopen("output.txt", "w", stdout);
 	#endif
 
+	int n;
+	cin>>n;
 
+	vector<int>v(n);
+	vector<int>subset;
 
-	int N;
-	cin >> N;
-	vector<pair<int, int>> customers;
-	for (int i = 0; i < N; ++i) {
-		int a, b; cin >> a >> b;
-		customers.push_back({a, 1});
-		customers.push_back({b + 1, -1});
+	for(int i=0; i<n; i++) cin>>v[i];
+
+	for(int i=1; i<(1<<n); i++){
+
+		for(int j=0; j<n; j++){
+			if((i & (1<<j))!=0){
+				subset.push_back(v[j]);
+			}
+		}
+		for(auto x : subset) cout<<x<<' ';
+	    	cout<<endl;
+	    subset.clear();
 	}
 
-	sort(customers.begin(), customers.end());
-
-	int curr = 0;
-	int l = 0;
-	vector<long long> pfx(2*N + 1); // prefix sum array
-	vector<int> arr(2*N);
-
-	for (int i = 0; i < 2*N; ++i) { // coordinate compression
-		if(i == 0) { customers[i].first = 0; }
-		else if(customers[i].first > curr) { l++; curr = customers[i].first; } // we move a pointer
-		arr[l+1] += customers[i].second;
-		// pfx[l+1] += customers[i].second; implementation without arr, merges all interval end and starts here
-	}
-
-	for (int i = 1; i < 2*N + 1; ++i) {
-		pfx[i] = arr[i] + pfx[i-1];
-		// pfx[i] += pfx[i-1]; implementation without arr
-	}
-
-	long long ret = 0;
-
-	for (int i = 0; i < 2*N + 1; ++i)
-		ret = max(ret, pfx[i]); // find our maximum value
-	cout << ret << "\n";
 
 	return 0;
 }
