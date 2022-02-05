@@ -8,7 +8,7 @@ typedef long long int ll;
 #define pb push_back
 int cnt [ MAXN+1];
 const int mod = 1e9+7;
-vector <ll> v;
+
 bool prime[MAXN];
 
 using vi = vector<int>;
@@ -23,7 +23,7 @@ using pi = pair<int,int>;
 
 
 
-void sieve ()
+/*void sieve ()
 {
     int i,j;
     prime[0] = prime[1] = true;
@@ -37,8 +37,7 @@ void sieve ()
                 prime[j] = true;
 }
 
-
-/*void sieve()
+void sieve()
 {
 	v.pb(2);
 	for(ll i=3;i*i<=MAXN;i+=2)
@@ -155,7 +154,7 @@ vector<int>parseInts(string s){
 	return ans;
 }
 
-*/
+
 
 void solve(){
 
@@ -190,56 +189,98 @@ int maxSubArraySum(int a[], int size)
     return max_so_far;
 }
 
+
+vector<int>v;
+
+long long ans=INT_MAX, sum=0,curr=0;
+
+void bf(int k){
+
+	if(k==n){
+		ans=min(ans,abs(sum-2*curr));
+		return;
+	}
+
+	curr+=v[k];
+	bf(k+1);
+	curr-=v[k];
+	bf(k+1);
+}
+
+// sieve of erathosthenes using bitset 
+
+ll _seive_size;
+
+bitset<10000001>bs;
+
+vector<int>primes;
+
+void sieve(ll upperbound){
+	_seive_size=upperbound+1;
+
+	bs.set();
+
+	bs[0] = bs[1] = 0;
+
+
+	for(ll i=2; i<=_seive_size; i++) if(bs[i]){
+
+		for(ll j= i*i ; j<=_seive_size; j+=i) bs[j]=0;
+			primes.push_back((int)i);
+		}  
+}
+
+
+/// binary search in a optimal way
+
+
+	int lo = 0;
+	int hi = n-1;
+
+	while(hi-lo>1){
+		int mid=(hi+lo)/2;
+
+		if(v[mid]<x){
+			lo=mid+1;
+		}else{
+			hi=mid;
+	}
+}  */
+
+int n;
+vector<int>v;
+
+vector<int>ss;
+
+
 int main()
 {   
 	
-	// IOS;
-	// double memoizedArray[1000001];//Array for Memoization
-	// memoizedArray[0] = 0; //Don't do manual log for 0, it will throw an error
-
-	// //Memoizing the array
-	// for(int i=1;i<=1000000;i++){
-	//   memoizedArray[i] = memoizedArray[i-1] + log(i);
-	// }
-
-	// int testCase, base;
-	// long digits,n;
-
-	// cin >> testCase;
-
-	// for(int i = 1; i<= testCase; i++){
-	//     cin >> n >> base;
-	//     //The formula
-	//     digits = memoizedArray[n]/log(base) + 1;
-	//     cout << "Case " << i << ": " << digits << "\n";
-	// }
-
-
+	IOS;
 	#ifndef ONLINE_JUDGE 
 	freopen("input.txt", "r", stdin); 
 	freopen("output.txt", "w", stdout);
 	#endif
+	
+
 
 	int n;
 	cin>>n;
 
-	vector<int>v(n);
-	vector<int>subset;
+	vector<pair<int , int>>v(n);
+	for(int i=0; i<n; i++){
+		cin>>v[i].first>>v[i].second;
+	}
 
-	for(int i=0; i<n; i++) cin>>v[i];
+	sort(v.begin(), v.end(), [](auto &a, auto &b){
+		return a.second < b.second;
+	});
 
-	for(int i=1; i<(1<<n); i++){
-
-		for(int j=0; j<n; j++){
-			if((i & (1<<j))!=0){
-				subset.push_back(v[j]);
-			}
-		}
-		for(auto x : subset) cout<<x<<' ';
-	    	cout<<endl;
-	    subset.clear();
+	for(int i=0; i<n; i++){
+		cout<<v[i].first<<' '<<v[i].second;
+		cout<<endl;
 	}
 
 
 	return 0;
-}
+}      
