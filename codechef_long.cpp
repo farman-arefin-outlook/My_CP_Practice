@@ -23,6 +23,21 @@ using pi = pair<int,int>;
 
 
 
+template <typename T>inline T BigMod(T base , T power, T MOD){
+	
+	T ret = 1;
+	while(power){
+		if(power & 1) ret = (ret*base)%MOD;
+
+		base=(base*base)%MOD;
+
+		power>>=1;
+	}
+	return ret;
+}
+
+
+
 /*void sieve ()
 {
     int i,j;
@@ -245,13 +260,19 @@ void sieve(ll upperbound){
 		}else{
 			hi=mid;
 	}
-}  */
+}  
 
-int n;
-vector<int>v;
 
-vector<int>ss;
+// custom compartor
+bool comp(const pair<int, int>&a , const pair<int, int>&b){
+	return a.second<b.second;
+}
 
+
+//Generic Function 
+template <typename T> T genericMin(T a, T b){
+	return (a<b? a: b);
+}*/
 
 int main()
 {   
@@ -261,26 +282,17 @@ int main()
 	freopen("input.txt", "r", stdin); 
 	freopen("output.txt", "w", stdout);
 	#endif
-	
-
 
 	int n;
 	cin>>n;
 
-	vector<pair<int , int>>v(n);
+	int x=0;
 	for(int i=0; i<n; i++){
-		cin>>v[i].first>>v[i].second;
+		int y;
+		cin>>y;
+		x^=y;
 	}
-
-	sort(v.begin(), v.end(), [](auto &a, auto &b){
-		return a.second < b.second;
-	});
-
-	for(int i=0; i<n; i++){
-		cout<<v[i].first<<' '<<v[i].second;
-		cout<<endl;
-	}
-
+	cout<<x<<endl;
 
 	return 0;
 }      
