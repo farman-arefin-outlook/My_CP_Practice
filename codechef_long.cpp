@@ -23,7 +23,7 @@ using pi = pair<int,int>;
 
 
 
-template <typename T>inline T BigMod(T base , T power, T MOD){
+/*template <typename T>inline T BigMod(T base , T power, T MOD){
 	
 	T ret = 1;
 	while(power){
@@ -38,7 +38,7 @@ template <typename T>inline T BigMod(T base , T power, T MOD){
 
 
 
-/*void sieve ()
+void sieve ()
 {
     int i,j;
     prime[0] = prime[1] = true;
@@ -283,16 +283,45 @@ int main()
 	freopen("output.txt", "w", stdout);
 	#endif
 
-	int n;
-	cin>>n;
+	int t;
+	cin>>t;
+	while(t--){
+		int x;
+		cin>>x;
+		string s;
+		cin>>s;
 
-	int x=0;
-	for(int i=0; i<n; i++){
-		int y;
-		cin>>y;
-		x^=y;
+
+		int c,d,n;
+		c=d=n=0;
+
+		for(int i=0;i<(int)s.size(); i++){
+			if(s[i]=='C'){
+				c++;
+			}
+			else if(s[i]=='N'){
+				n++;
+			}
+			else{
+				d++;
+			}
+		}
+
+		c=2*c+d;
+		n=2*n+d;
+
+		if(c>n){
+			cout<<(60*x)<<endl;
+		}
+		else if(c<n){
+			cout<<(40*x)<<endl;
+		}
+		else{
+			cout<<(55*x)<<endl;
+		}
+
 	}
-	cout<<x<<endl;
+
 
 	return 0;
 }      
