@@ -17,7 +17,7 @@ using vi = vector<int>;
 #define sz(x) (int)(x).size()
 
 using pi = pair<int,int>;
-#define f first
+
 #define s second
 #define mp make_pair
 
@@ -274,6 +274,51 @@ template <typename T> T genericMin(T a, T b){
 	return (a<b? a: b);
 }*/
 
+
+#define f(a,b,c) for(int a=b;a<=c;a++)
+
+void solve(){
+	ll n;
+	cin>>n;
+
+	vector<pair<ll, ll>>a(n),b(n);
+
+
+	f(i,0,n){
+		cin>>a[i].first;
+		a[i].second=i;
+	}
+	f(i,0,n){
+		cin>>b[i].first;
+		b[i].second=i;
+	}
+
+	sort(a.begin(),a.end());
+
+	sort(b.begin(),b.end());
+
+	set<ll>edges_in_cycle;
+
+	ll i=n-1;
+
+	for(; i>=0; --i){
+		edges_in_cycle.insert(a[i].second);
+		edges_in_cycle.insert(b[i].second);
+		if(n-i == edges_in_cycle.size()){
+			break;
+		}
+	}
+	string s="";
+
+	f(i,0,n) s+='0';
+	for(; i<n; ++i){
+		s[a[i].second]='1';
+	}
+	cout<<s<<endl;
+
+	return;
+}
+
 int main()
 {   
 	
@@ -286,42 +331,8 @@ int main()
 	int t;
 	cin>>t;
 	while(t--){
-		int x;
-		cin>>x;
-		string s;
-		cin>>s;
-
-
-		int c,d,n;
-		c=d=n=0;
-
-		for(int i=0;i<(int)s.size(); i++){
-			if(s[i]=='C'){
-				c++;
-			}
-			else if(s[i]=='N'){
-				n++;
-			}
-			else{
-				d++;
-			}
+		solve();
 		}
-
-		c=2*c+d;
-		n=2*n+d;
-
-		if(c>n){
-			cout<<(60*x)<<endl;
-		}
-		else if(c<n){
-			cout<<(40*x)<<endl;
-		}
-		else{
-			cout<<(55*x)<<endl;
-		}
-
-	}
-
 
 	return 0;
 }      
