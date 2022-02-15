@@ -275,46 +275,46 @@ template <typename T> T genericMin(T a, T b){
 }*/
 
 
-#define f(a,b,c) for(int a=b;a<=c;a++)
-
 void solve(){
-	ll n;
+
+	int n;
 	cin>>n;
+	vector<int>odd,even;
 
-	vector<pair<ll, ll>>a(n),b(n);
-
-
-	f(i,0,n){
-		cin>>a[i].first;
-		a[i].second=i;
+	for(int i=0; i<n; i++){
+		int x;
+		cin>>x;
+		if(x%2){
+			odd.push_back(x);
+		}else{
+			even.push_back(x);
+		}
 	}
-	f(i,0,n){
-		cin>>b[i].first;
-		b[i].second=i;
-	}
 
-	sort(a.begin(),a.end());
+	vector<int>sorted_odd,sorted_even;
 
-	sort(b.begin(),b.end());
+	sorted_even=even;
+	sorted_odd=odd;
 
-	set<ll>edges_in_cycle;
+	bool flag=true;
 
-	ll i=n-1;
+	sort(odd.begin() , odd.end());
+	sort(even.begin() , even.end());
 
-	for(; i>=0; --i){
-		edges_in_cycle.insert(a[i].second);
-		edges_in_cycle.insert(b[i].second);
-		if(n-i == edges_in_cycle.size()){
+	for(int i=0; i<(int)odd.size(); i++){
+
+		if(odd[i]!=sorted_odd[i]){
+			flag=false;
 			break;
 		}
 	}
-	string s="";
-
-	f(i,0,n) s+='0';
-	for(; i<n; ++i){
-		s[a[i].second]='1';
+	for(int i=0; i<(int)even.size(); i++){
+		if(even[i]!=sorted_even[i]){
+			flag=false;
+		}
 	}
-	cout<<s<<endl;
+
+	cout<<(flag?"Yes":"No")<<endl;
 
 	return;
 }
