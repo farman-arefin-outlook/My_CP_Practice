@@ -334,6 +334,29 @@ void solve(){
 }
 */
 
+
+const int n=200000;
+
+int a[n];
+
+int func(int n){
+  int res=0;
+
+  for(int i=0; i<n; i++){
+    if(i>0 and i<=n){
+      if(a[i]>a[i-1] and a[i]>a[i+1]){
+        if(i<=n-3){
+          a[i+1]=max(a[i],a[i+2]);
+        }else{
+          a[n-1]=a[n-2];
+        }
+        res++;
+      }
+    }
+  }
+  return res;
+}
+
 int main()
 {   
 	
@@ -349,27 +372,17 @@ int main()
   while(t--){
     int n;
     cin>>n;
-    vector<int>v(n);
+   
+    for(int i=0; i<n; i++) cin>>a[i];
 
-    for(int i=0; i<n; i++) cin>>v[i];
+      cout<<func(n)<<endl;
 
-    int cnt=0;
-    for(int i=1; i<n; i++){
-      if(v[i]>v[i+1] and v[i]>v[i-1]){
-        cnt++;
-        if(i+2<n){
-          v[i+1]=max(v[i],v[i+2]);
-
-        }else{
-          v[i+1]=v[i];
-        }
-      }
-    }
-    cout<<cnt<<endl;
-    for(int i:v){
-      cout<<i<<' ';
+    for(int i=0;i<n;i++){
+      cout<<a[i]<<' ';
     }
     cout<<endl;
+
+    
   }
 	
 	return 0;
