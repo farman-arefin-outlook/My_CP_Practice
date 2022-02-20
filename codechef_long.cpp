@@ -272,52 +272,67 @@ bool comp(const pair<int, int>&a , const pair<int, int>&b){
 //Generic Function 
 template <typename T> T genericMin(T a, T b){
 	return (a<b? a: b);
-}*/
+}
 
+
+vector<pair<int , int>>v[1005];
+bool vis[1005];
+int dis[1005];
+
+vector<int>ans;
+
+int mx=0;
+
+void dfs(int node, int dist){
+	if(vis[node]==1) return;
+
+	ans.push_back(node);
+	vis[node]=1;
+	mx=max(mx,dist);
+	dis[node]=dist;
+	for(auto [u, w] : v[node]){
+		dfs(u, dist+w);
+	}
+	return;
+}
 
 void solve(){
 
 	int n;
 	cin>>n;
-	vector<int>odd,even;
 
-	for(int i=0; i<n; i++){
-		int x;
-		cin>>x;
-		if(x%2){
-			odd.push_back(x);
-		}else{
-			even.push_back(x);
+
+	for(int i=0; i<n; i++) vis[i]=0;
+
+	for(int i=0; i<n-1; i++){
+		int x,y,w;
+
+		cin>>x>>y>>w;
+
+		v[x].push_back({y,w});
+		v[y].push_back({x,w});
+	  }
+
+		dfs(0,0);
+
+		int next_node;
+
+		for(int i=0; i<n; i++){
+			if(dis[i]==mx){
+				next_node=i;
+				break;
+			}
 		}
-	}
-
-	vector<int>sorted_odd,sorted_even;
-
-	sorted_even=even;
-	sorted_odd=odd;
-
-	bool flag=true;
-
-	sort(odd.begin() , odd.end());
-	sort(even.begin() , even.end());
-
-	for(int i=0; i<(int)odd.size(); i++){
-
-		if(odd[i]!=sorted_odd[i]){
-			flag=false;
-			break;
+		for(int i=0; i<n; i++){
+			vis[i]=0;
 		}
-	}
-	for(int i=0; i<(int)even.size(); i++){
-		if(even[i]!=sorted_even[i]){
-			flag=false;
-		}
-	}
+		mx=0;
+		dfs(next_node,0);
+		cout<<mx<<endl;		
 
-	cout<<(flag?"Yes":"No")<<endl;
-
-	return;
+    return;
 }
+*/
 
 int main()
 {   
@@ -329,10 +344,33 @@ int main()
 	#endif
 
 	int t;
-	cin>>t;
-	while(t--){
-		solve();
-		}
+  cin>>t;
 
+  while(t--){
+    int n;
+    cin>>n;
+    vector<int>v(n);
+
+    for(int i=0; i<n; i++) cin>>v[i];
+
+    int cnt=0;
+    for(int i=1; i<n; i++){
+      if(v[i]>v[i+1] and v[i]>v[i-1]){
+        cnt++;
+        if(i+2<n){
+          v[i+1]=max(v[i],v[i+2]);
+
+        }else{
+          v[i+1]=v[i];
+        }
+      }
+    }
+    cout<<cnt<<endl;
+    for(int i:v){
+      cout<<i<<' ';
+    }
+    cout<<endl;
+  }
+	
 	return 0;
 }      
