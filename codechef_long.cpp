@@ -332,7 +332,7 @@ void solve(){
 
     return;
 }
-*/
+
 
 
 const int n=200000;
@@ -355,6 +355,54 @@ int func(int n){
     }
   }
   return res;
+}*/
+
+void solve(){
+     int n;
+      cin>>n;
+
+      string s;
+      cin>>s;
+
+      if(n==1){
+         if(s[0]=='0'){
+            cout<<"No"<<endl;
+         }else{
+            cout<<"Yes"<<endl;
+            cout<<0<<endl;
+         }
+         return;
+      }
+      if(n==2){
+        if(s[0]=='0' or s[1]=='0'){
+            cout<<"No"<<endl;
+        }else{
+            cout<<"0 1"<<endl;
+        }return;
+      }
+      if(s[0]=='0' or s[1]=='0' or s.back()=='0'){
+        cout<<"No"<<endl;
+        return;
+      }
+
+      vector<int>ans;
+
+      ans.push_back(0);
+
+      int cnt=1;
+      for(int i=2; i<(int)s.length()-1;i++){
+        if(s[i]=='0'){
+            ans.push_back(i);
+        }else{
+            ans.push_back(cnt);
+            cnt=i;
+        }
+      }
+      cout<<"Yes"<<endl;
+
+      for(auto i:ans){
+        cout<<i<<' ';
+      }cout<<cnt<<endl;
 }
 
 int main()
@@ -370,19 +418,8 @@ int main()
   cin>>t;
 
   while(t--){
-    int n;
-    cin>>n;
-   
-    for(int i=0; i<n; i++) cin>>a[i];
+    solve();
 
-      cout<<func(n)<<endl;
-
-    for(int i=0;i<n;i++){
-      cout<<a[i]<<' ';
-    }
-    cout<<endl;
-
-    
   }
 	
 	return 0;
