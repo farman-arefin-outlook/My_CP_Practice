@@ -16,6 +16,8 @@ using vi = vector<int>;
 #define all(x) begin(x), end(x)
 #define sz(x) (int)(x).size()
 
+#define pb push_back
+
 using pi = pair<int,int>;
 
 #define s second
@@ -355,55 +357,38 @@ int func(int n){
     }
   }
   return res;
-}*/
+}
+
+
+//counting sort
+
+vector<int>counting_sort(vector<int>&a,int m){
+    int n=a.size();
+
+    vector<int>c(m,0);
+
+    for(int i=0; i<n; i++) c[a[i]]++;
+
+    vector<int>b;
+
+    for(int i=0; i<m; i++){
+
+        for(int j=0; j<c[i]; j++){
+            b.push_back(i);
+        }
+    }
+    return b;
+}
+
+
+
+*/
 
 void solve(){
-     int n;
-      cin>>n;
-
-      string s;
-      cin>>s;
-
-      if(n==1){
-         if(s[0]=='0'){
-            cout<<"No"<<endl;
-         }else{
-            cout<<"Yes"<<endl;
-            cout<<0<<endl;
-         }
-         return;
-      }
-      if(n==2){
-        if(s[0]=='0' or s[1]=='0'){
-            cout<<"No"<<endl;
-        }else{
-            cout<<"0 1"<<endl;
-        }return;
-      }
-      if(s[0]=='0' or s[1]=='0' or s.back()=='0'){
-        cout<<"No"<<endl;
-        return;
-      }
-
-      vector<int>ans;
-
-      ans.push_back(0);
-
-      int cnt=1;
-      for(int i=2; i<(int)s.length()-1;i++){
-        if(s[i]=='0'){
-            ans.push_back(i);
-        }else{
-            ans.push_back(cnt);
-            cnt=i;
-        }
-      }
-      cout<<"Yes"<<endl;
-
-      for(auto i:ans){
-        cout<<i<<' ';
-      }cout<<cnt<<endl;
+   
+   return;
 }
+
 
 int main()
 {   
@@ -414,13 +399,53 @@ int main()
 	freopen("output.txt", "w", stdout);
 	#endif
 
-	int t;
-  cin>>t;
+    int t;
+    cin>>t;
 
-  while(t--){
-    solve();
+    while(t--){
+        ll l,r,a;
+        cin>>l>>r>>a;
 
-  }
-	
+        vector<ll>vec;
+
+        ll x=l/a+l%a;
+
+        vec.pb(x);
+
+        x=r/a+r%a;
+
+        ll mid=(l+r)/2;
+
+        ll c=mid/a+mid%a;
+
+        vec.pb(c);
+
+        vec.pb(x);
+
+        ll m=r/a;
+
+        m=m*a;
+
+        if(m-1>l and m-1<r){
+            ll b=(m-1)/a+(m-1)%a;
+
+            vec.pb(b);
+        }
+
+        if(m+1>l and m+1<r){
+            ll b=(m-1)/a+(m-1)%a;
+            vec.pb(b);
+        }
+
+        ll mx=-1e9;
+
+        for(auto v:vec){
+            if(mx<=v){
+                mx=v;
+            }
+        }
+        cout<<mx<<endl;
+    }
+
 	return 0;
-}      
+}     
