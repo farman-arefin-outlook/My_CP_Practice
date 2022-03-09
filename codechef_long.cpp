@@ -390,6 +390,10 @@ void solve(){
 }
 
 
+ll func(ll a, ll b){
+    return (a/b)+(a%b);
+}
+
 int main()
 {   
 	
@@ -403,48 +407,30 @@ int main()
     cin>>t;
 
     while(t--){
-        ll l,r,a;
-        cin>>l>>r>>a;
+       ll n;
+       cin>>n;
 
-        vector<ll>vec;
+       vector<ll>v(n),a,b;
 
-        ll x=l/a+l%a;
+       for(int i=0; i<n; i++){
+          cin>>v[i];
+       }
 
-        vec.pb(x);
-
-        x=r/a+r%a;
-
-        ll mid=(l+r)/2;
-
-        ll c=mid/a+mid%a;
-
-        vec.pb(c);
-
-        vec.pb(x);
-
-        ll m=r/a;
-
-        m=m*a;
-
-        if(m-1>l and m-1<r){
-            ll b=(m-1)/a+(m-1)%a;
-
-            vec.pb(b);
-        }
-
-        if(m+1>l and m+1<r){
-            ll b=(m-1)/a+(m-1)%a;
-            vec.pb(b);
-        }
-
-        ll mx=-1e9;
-
-        for(auto v:vec){
-            if(mx<=v){
-                mx=v;
+       ll res=0;
+       for(int i=0; i<n; i++){
+            if(i%2==0){
+                res+=abs(v[i]);
+                a.pb(abs(v[i]));
+            }else{
+                res+=(-1)*abs(v[i]);
+                b.pb(abs(v[i]));
             }
-        }
-        cout<<mx<<endl;
+       }
+       if((*min_element(a.begin(),a.end()))<(*max_element(b.begin(),b.end()))){
+        res+=2*(*max_element(b.begin(),b.end())-*(min_element(a.begin(),a.end())));
+    }
+
+        cout<<res<<endl;
     }
 
 	return 0;
