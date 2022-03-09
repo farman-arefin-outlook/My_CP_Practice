@@ -7,7 +7,7 @@ typedef long long int ll;
 #define MAXN 10000001
 #define pb push_back
 int cnt [ MAXN+1];
-const int mod = 1e9+7;
+const ll mod = 1e9+7;
 
 bool prime[MAXN];
 
@@ -407,30 +407,33 @@ int main()
     cin>>t;
 
     while(t--){
-       ll n;
-       cin>>n;
+       ll n,m;
+       cin>>n>>m;
 
-       vector<ll>v(n),a,b;
+       vector<ll>v(n);
 
-       for(int i=0; i<n; i++){
-          cin>>v[i];
-       }
+       for(int i=0; i<n; i++) cin>>v[i];
 
-       ll res=0;
-       for(int i=0; i<n; i++){
-            if(i%2==0){
-                res+=abs(v[i]);
-                a.pb(abs(v[i]));
-            }else{
-                res+=(-1)*abs(v[i]);
-                b.pb(abs(v[i]));
+        while(m--){
+            ll c,x;
+
+            cin>>c>>x;
+
+            vector<ll>u(2*x);
+
+            for(int i=0; i<2*x; i++){
+                cin>>u[i];
             }
-       }
-       if((*min_element(a.begin(),a.end()))<(*max_element(b.begin(),b.end()))){
-        res+=2*(*max_element(b.begin(),b.end())-*(min_element(a.begin(),a.end())));
-    }
 
-        cout<<res<<endl;
+            ll temp=v[c-1];
+            v[c-1]=0;
+
+            for(int i=0; i<(int)u.size()-1; i+=2){
+                v[u[i+1]-1]=(v[u[i+1]-1]+temp*u[i])%mod;
+            }
+        }
+
+        for(auto x:v) cout<<x<<'\n';
     }
 
 	return 0;
