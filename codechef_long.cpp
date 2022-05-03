@@ -6,7 +6,6 @@ typedef long long int ll;
 
 #define MAXN 10000001
 #define pb push_back
-int cnt [ MAXN+1];
 const ll mod = 1e9+7;
 
 bool prime[MAXN];
@@ -384,15 +383,6 @@ vector<int>counting_sort(vector<int>&a,int m){
 
 */
 
-void solve(){
-   
-   return;
-}
-
-
-ll func(ll a, ll b){
-    return (a/b)+(a%b);
-}
 
 int main()
 {   
@@ -403,38 +393,27 @@ int main()
 	freopen("output.txt", "w", stdout);
 	#endif
 
+
     int t;
     cin>>t;
 
-    while(t--){
-       ll n,m;
-       cin>>n>>m;
+    for(int i=1; i<=t; i++){
+        string s;
+        cin>>s;
 
-       vector<ll>v(n);
-
-       for(int i=0; i<n; i++) cin>>v[i];
-
-        while(m--){
-            ll c,x;
-
-            cin>>c>>x;
-
-            vector<ll>u(2*x);
-
-            for(int i=0; i<2*x; i++){
-                cin>>u[i];
-            }
-
-            ll temp=v[c-1];
-            v[c-1]=0;
-
-            for(int i=0; i<(int)u.size()-1; i+=2){
-                v[u[i+1]-1]=(v[u[i+1]-1]+temp*u[i])%mod;
+        bool ok=false;
+        for(int i=0; i<(int)s.size(); i++){
+            if(s[i]=='a'==s[i+1]=='a' or s[i]=='b'==s[i+1]=='b'){
+                 ok=true;
             }
         }
-
-        for(auto x:v) cout<<x<<'\n';
+        if(ok){
+            cout<<"YES"<<endl;
+        }else{
+            cout<<"NO"<<endl;
+        }
     }
 
-	return 0;
+
+ 	return 0;
 }     
