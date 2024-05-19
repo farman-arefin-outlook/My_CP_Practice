@@ -26,19 +26,22 @@ int32_t main(){
     std::ios_base::sync_with_stdio(false);
 
 
-    //cses 1
-    // int n;
-    // cin>>n;
+    //cses 2
+    string s;
+    cin>>s;
 
-    // while(n!=1){
-    //   cout<<n<<' ';
-    //   if(n&1){
-    //     n=3*n+1;
-    //   }else{
-    //     n>>=1;
-    //   }
-    // }
-    // cout<<1;
+    int best=1;
+    int cnt=1;
+
+    for(int i=0; i<(int)s.size(); i++){
+        if(s[i]==s[i+1]){
+          cnt++;
+        }else{
+          cnt=1;
+        }
+        best=max(best,cnt);
+    }
+    cout<<best<<endl;
 
     return 0;
 
