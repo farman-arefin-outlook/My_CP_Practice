@@ -26,22 +26,25 @@ int32_t main(){
     std::ios_base::sync_with_stdio(false);
 
 
-    //cses 2
-    string s;
-    cin>>s;
+    //cses 4
+    int n;
+    cin>>n;
 
-    int best=1;
-    int cnt=1;
+    vector<int>v(n);
 
-    for(int i=0; i<(int)s.size(); i++){
-        if(s[i]==s[i+1]){
-          cnt++;
-        }else{
-          cnt=1;
-        }
-        best=max(best,cnt);
+    for(int i=0; i<n; i++){
+        cin>>v[i];
     }
-    cout<<best<<endl;
+
+    int cnt=0;
+
+    for(int i=1; i<n; i++){
+      if(v[i]<v[i-1]){
+        cnt+=(v[i-1]-v[i]);
+        v[i]=v[i-1];
+      }
+    }
+    cout<<cnt<<endl;
 
     return 0;
 
